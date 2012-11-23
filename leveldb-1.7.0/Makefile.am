@@ -1,0 +1,150 @@
+# detect what platform we're building on
+$(shell CC=$(CC) CXX=$(CXX) TARGET_OS=$(TARGET_OS) \
+    ./build_detect_platform build_config.mk ./)
+
+AM_LDFLAGS = $(PLATFORM_LDFLAGS)
+
+noinst_LIBRARIES =
+noinst_LIBRARIES += libleveldb.a
+
+libleveldb_a_CCFLAGS = $(PLATFORM_CCFLAGS)
+libleveldb_a_CCFLAGS += -I$(top_srcdir)/leveldb-1.7.0/include
+libleveldb_a_CCFLAGS += -I$(top_srcdir)/leveldb-1.7.0
+
+libleveldb_a_CPPFLAGS =
+libleveldb_a_CPPFLAGS += -I$(top_srcdir)/leveldb-1.7.0
+libleveldb_a_CPPFLAGS += -I$(top_srcdir)/leveldb-1.7.0/include
+
+libleveldb_a_CXXFLAGS = $(PLATFORM_CXXFLAGS)
+libleveldb_a_CXXFLAGS += -I$(top_srcdir)/leveldb-1.7.0/include
+libleveldb_a_CXXFLAGS += -I$(top_srcdir)/leveldb-1.7.0
+
+libleveldb_a_SOURCES = 
+libleveldb_a_SOURCES += db/builder.cc
+libleveldb_a_SOURCES += db/builder.h
+libleveldb_a_SOURCES += db/c.cc
+libleveldb_a_SOURCES += db/c_test.c
+libleveldb_a_SOURCES += db/db_bench.cc
+libleveldb_a_SOURCES += db/db_impl.cc
+libleveldb_a_SOURCES += db/db_impl.h
+libleveldb_a_SOURCES += db/db_iter.cc
+libleveldb_a_SOURCES += db/db_iter.h
+libleveldb_a_SOURCES += db/dbformat.cc
+libleveldb_a_SOURCES += db/dbformat.h
+libleveldb_a_SOURCES += db/filename.cc
+libleveldb_a_SOURCES += db/filename.h
+libleveldb_a_SOURCES += db/log_format.h
+libleveldb_a_SOURCES += db/log_reader.cc
+libleveldb_a_SOURCES += db/log_reader.h
+libleveldb_a_SOURCES += db/log_writer.cc
+libleveldb_a_SOURCES += db/log_writer.h
+libleveldb_a_SOURCES += db/memtable.cc
+libleveldb_a_SOURCES += db/memtable.h
+libleveldb_a_SOURCES += db/repair.cc
+libleveldb_a_SOURCES += db/skiplist.h
+libleveldb_a_SOURCES += db/snapshot.h
+libleveldb_a_SOURCES += db/table_cache.cc
+libleveldb_a_SOURCES += db/table_cache.h
+libleveldb_a_SOURCES += db/version_edit.cc
+libleveldb_a_SOURCES += db/version_edit.h
+libleveldb_a_SOURCES += db/version_set.cc
+libleveldb_a_SOURCES += db/version_set.h
+libleveldb_a_SOURCES += db/write_batch.cc
+libleveldb_a_SOURCES += db/write_batch_internal.h
+libleveldb_a_SOURCES += include/leveldb
+libleveldb_a_SOURCES += include/leveldb/c.h
+libleveldb_a_SOURCES += include/leveldb/cache.h
+libleveldb_a_SOURCES += include/leveldb/comparator.h
+libleveldb_a_SOURCES += include/leveldb/db.h
+libleveldb_a_SOURCES += include/leveldb/env.h
+libleveldb_a_SOURCES += include/leveldb/filter_policy.h
+libleveldb_a_SOURCES += include/leveldb/iterator.h
+libleveldb_a_SOURCES += include/leveldb/options.h
+libleveldb_a_SOURCES += include/leveldb/slice.h
+libleveldb_a_SOURCES += include/leveldb/status.h
+libleveldb_a_SOURCES += include/leveldb/table.h
+libleveldb_a_SOURCES += include/leveldb/table_builder.h
+libleveldb_a_SOURCES += include/leveldb/write_batch.h
+libleveldb_a_SOURCES += port/atomic_pointer.h
+libleveldb_a_SOURCES += port/port.h
+libleveldb_a_SOURCES += port/port_example.h
+libleveldb_a_SOURCES += port/port_posix.cc
+libleveldb_a_SOURCES += port/port_posix.h
+libleveldb_a_SOURCES += port/thread_annotations.h
+libleveldb_a_SOURCES += port/win
+libleveldb_a_SOURCES += port/win/stdint.h
+libleveldb_a_SOURCES += table/block.cc
+libleveldb_a_SOURCES += table/block.h
+libleveldb_a_SOURCES += table/block_builder.cc
+libleveldb_a_SOURCES += table/block_builder.h
+libleveldb_a_SOURCES += table/filter_block.cc
+libleveldb_a_SOURCES += table/filter_block.h
+libleveldb_a_SOURCES += table/filter_block_test.cc
+libleveldb_a_SOURCES += table/format.cc
+libleveldb_a_SOURCES += table/format.h
+libleveldb_a_SOURCES += table/iterator.cc
+libleveldb_a_SOURCES += table/iterator_wrapper.h
+libleveldb_a_SOURCES += table/merger.cc
+libleveldb_a_SOURCES += table/merger.h
+libleveldb_a_SOURCES += table/table.cc
+libleveldb_a_SOURCES += table/table_builder.cc
+libleveldb_a_SOURCES += table/table_test.cc
+libleveldb_a_SOURCES += table/two_level_iterator.cc
+libleveldb_a_SOURCES += table/two_level_iterator.h
+libleveldb_a_SOURCES += util/arena.cc
+libleveldb_a_SOURCES += util/arena.h
+libleveldb_a_SOURCES += util/arena_test.cc
+libleveldb_a_SOURCES += util/bloom.cc
+libleveldb_a_SOURCES += util/bloom_test.cc
+libleveldb_a_SOURCES += util/cache.cc
+libleveldb_a_SOURCES += util/cache_test.cc
+libleveldb_a_SOURCES += util/coding.cc
+libleveldb_a_SOURCES += util/coding.h
+libleveldb_a_SOURCES += util/coding_test.cc
+libleveldb_a_SOURCES += util/comparator.cc
+libleveldb_a_SOURCES += util/crc32c.cc
+libleveldb_a_SOURCES += util/crc32c.h
+libleveldb_a_SOURCES += util/crc32c_test.cc
+libleveldb_a_SOURCES += util/env.cc
+libleveldb_a_SOURCES += util/env_posix.cc
+libleveldb_a_SOURCES += util/env_test.cc
+libleveldb_a_SOURCES += util/filter_policy.cc
+libleveldb_a_SOURCES += util/hash.cc
+libleveldb_a_SOURCES += util/hash.h
+libleveldb_a_SOURCES += util/histogram.cc
+libleveldb_a_SOURCES += util/histogram.h
+libleveldb_a_SOURCES += util/logging.cc
+libleveldb_a_SOURCES += util/logging.h
+libleveldb_a_SOURCES += util/mutexlock.h
+libleveldb_a_SOURCES += util/options.cc
+libleveldb_a_SOURCES += util/posix_logger.h
+libleveldb_a_SOURCES += util/random.h
+libleveldb_a_SOURCES += util/status.cc
+libleveldb_a_SOURCES += util/testharness.cc
+libleveldb_a_SOURCES += util/testharness.h
+libleveldb_a_SOURCES += util/testutil.cc
+libleveldb_a_SOURCES += util/testutil.h
+
+
+noinst_LIBRARIES += libmemenv.a
+
+libmemenv_a_CCFLAGS = $(PLATFORM_CCFLAGS)
+libmemenv_a_CCFLAGS += -I$(top_srcdir)/leveldb-1.7.0/include
+libmemenv_a_CCFLAGS += -I$(top_srcdir)/leveldb-1.7.0
+
+libmemenv_a_CPPFLAGS =
+libmemenv_a_CPPFLAGS += -I$(top_srcdir)/leveldb-1.7.0
+libmemenv_a_CPPFLAGS += -I$(top_srcdir)/leveldb-1.7.0/include
+
+libmemenv_a_CXXFLAGS = $(PLATFORM_CXXFLAGS)
+libmemenv_a_CXXFLAGS += -I$(top_srcdir)/leveldb-1.7.0/include
+libmemenv_a_CXXFLAGS += -I$(top_srcdir)/leveldb-1.7.0
+
+libmemenv_a_SOURCES = 
+libmemenv_a_SOURCES += $(MEMENV_SOURCES)
+libmemenv_a_SOURCES += helpers/memenv/memenv.h
+libmemenv_a_SOURCES += helpers/memenv/memenv_test.cc
+
+# this file is generated by the previous line to set build flags and sources
+include build_config.mk
+

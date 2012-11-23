@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([entropy-hackery], [1.0], [tierney@cs.nyu.edu])
+AC_INIT([entrupy-hackery], [1.0], [tierney@cs.nyu.edu])
 AC_CONFIG_SRCDIR([include/json/autolink.h])
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE
@@ -10,8 +10,8 @@ LT_INIT
 AC_CONFIG_MACRO_DIR([m4])
 
 # Checks for programs.
-AC_PROG_CXX
-AC_PROG_CC
+AC_PROG_CXX([clang++])
+AM_PROG_CC_C_O
 
 # Checks for libraries.
 
@@ -28,5 +28,6 @@ AC_FUNC_MALLOC
 AC_CHECK_FUNCS([strchr strpbrk])
 
 AC_CONFIG_FILES([Makefile
+                 leveldb-1.7.0/Makefile
                  src/lib_json/Makefile])
 AC_OUTPUT

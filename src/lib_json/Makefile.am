@@ -1,6 +1,7 @@
 noinst_LTLIBRARIES = 
 
 noinst_LTLIBRARIES += libjson.la
+
 libjson_la_SOURCES =
 libjson_la_SOURCES += json_reader.cpp 
 libjson_la_SOURCES += json_value.cpp 

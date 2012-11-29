@@ -10,7 +10,7 @@ LT_INIT
 AC_CONFIG_MACRO_DIR([m4])
 
 # Checks for programs.
-AC_PROG_CXX([clang++])
+AC_PROG_CXX
 AM_PROG_CC_C_O
 
 # Checks for libraries.
@@ -29,5 +29,6 @@ AC_CHECK_FUNCS([strchr strpbrk])
 
 AC_CONFIG_FILES([Makefile
                  leveldb-1.7.0/Makefile
-                 src/lib_json/Makefile])
+                 src/lib_json/Makefile
+                 src/Makefile])
 AC_OUTPUT

@@ -4,11 +4,24 @@
 #include "json/json.h"
 #include "json/reader.h"
 
+void OpenJsonRedisDump(const std::string &filename,
+                       std::string *contents) {
+  std::ifstream fin("data.dat");
+
+  fin.seekg(0, std::ios::end);   
+  contents->reserve(fin.tellg());
+  fin.seekg(0, std::ios::beg);
+
+  contents->assign((std::istreambuf_iterator<char>(fin)),
+                   std::istreambuf_iterator<char>());
+}
+
 int main(int argc, char **argv) {
   Json::Value root;   // will contains the root value after parsing.
   Json::Reader reader;
 
-  std::string json_doc = "{\"hello\":\"world\"}";
+  std::string json_doc;
+  OpenJsonRedisDump("~/data/dump.dat", &json_doc);
   
   bool parsingSuccessful = reader.parse( json_doc, root );
   if (!parsingSuccessful) {

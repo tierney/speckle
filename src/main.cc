@@ -20,7 +20,7 @@ void OpenJsonRedisDump(const std::string &filename,
 int main(int argc, char **argv) {
   std::string json_doc;
   std::cout << "Reading the file." << std::endl;
-  OpenJsonRedisDump("dump.dat", &json_doc);
+  OpenJsonRedisDump("src/dump.dat", &json_doc);
 
   std::cout << "Attempting to parse." << std::endl;
   Json::Value root;   // will contains the root value after parsing.

@@ -1,3 +1,4 @@
+#include <fstream>
 #include <iostream>
 #include <string>
 
@@ -6,7 +7,7 @@
 
 void OpenJsonRedisDump(const std::string &filename,
                        std::string *contents) {
-  std::ifstream fin("data.dat");
+  std::ifstream fin(filename.c_str());
 
   fin.seekg(0, std::ios::end);   
   contents->reserve(fin.tellg());
@@ -17,11 +18,13 @@ void OpenJsonRedisDump(const std::string &filename,
 }
 
 int main(int argc, char **argv) {
+  std::string json_doc;
+  std::cout << "Reading the file." << std::endl;
+  OpenJsonRedisDump("dump.dat", &json_doc);
+
+  std::cout << "Attempting to parse." << std::endl;
   Json::Value root;   // will contains the root value after parsing.
   Json::Reader reader;
-
-  std::string json_doc;
-  OpenJsonRedisDump("~/data/dump.dat", &json_doc);
   
   bool parsingSuccessful = reader.parse( json_doc, root );
   if (!parsingSuccessful) {

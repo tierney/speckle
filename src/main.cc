@@ -1,12 +1,21 @@
+// Copyright 2012 Matt Tierney. All Rights Reserved.
+// BSD-Style License.
+
+#include <assert.h>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <string>
+#include <vector>
 
 #include "json/json.h"
 #include "json/reader.h"
+#include "leveldb/db.h"
+#include "stl_util.h"
+#include "leveldb_util.h"
 
-void OpenJsonRedisDump(const std::string &filename,
-                       std::string *contents) {
+void OpenJsonRedisDump(const std::string& filename,
+                       std::string* contents) {
   std::ifstream fin(filename.c_str());
 
   fin.seekg(0, std::ios::end);   
@@ -20,7 +29,7 @@ void OpenJsonRedisDump(const std::string &filename,
 int main(int argc, char **argv) {
   std::string json_doc;
   std::cout << "Reading the file." << std::endl;
-  OpenJsonRedisDump("src/dump.dat", &json_doc);
+  OpenJsonRedisDump("/Users/tierney/data/dump.dat", &json_doc);
 
   std::cout << "Attempting to parse." << std::endl;
   Json::Value root;   // will contains the root value after parsing.
@@ -34,15 +43,35 @@ int main(int argc, char **argv) {
     return -1;
   }
 
-  // Get the value of the member of root named 'encoding', return 'UTF-8' if
-  // there is no such member.
-  std::string encoding = root.get("encoding", "UTF-8" ).asString();
-  // Get the value of the member of root named 'encoding', return a 'null' value
-  // if there is no such member.
-  const Json::Value plugins = root["plug-ins"];
-  // for ( int index = 0; index < plugins.size(); ++index )  // Iterates over the
-  //                                                         // sequence elements.
-  //   loadPlugIn( plugins[index].asString() );
+  // const Json::Value::Members members = root.getMemberNames();
+  // for (int i = 0; i < members.size(); i++) {
+  //   std::cout << members[i] << std::endl;
+  //   for (int j = 0; j < root[members[i]].size(); j++) {
+  //     std::cout << " " << root[members[i]][j] << std::endl;
+  //   }
+  // }
 
+  leveldb::DB* db;
+
+  leveldb::Options options;
+  options.create_if_missing = true;
+  leveldb::Status status = leveldb::DB::Open(options, "/tmp/testdb", &db);
+  assert(status.ok());
+
+  const Json::Value::Members members = root.getMemberNames();
+  for (int i = 0; i < members.size(); i++) {
+    // std::cout << members[i] << std::endl;
+    const std::string& key =  members[i];
+
+    for (int j = 0; j < root[members[i]].size(); j++) {
+      // std::cout << " " << root[members[i]][j] << std::endl;
+      const std::string& value = root[members[i]][j].asString();
+      const std::string new_key(CreateLevelDBKey(key, db));
+      db->Put(leveldb::WriteOptions(), new_key, value);
+    }
+  }
+
+  delete db;
+  
   return 0;
 }

@@ -1,5 +1,7 @@
 #!/bin/sh
 
+mkdir -p m4
+
 autoreconf --install -v
 
 cd leveldb-1.7.0

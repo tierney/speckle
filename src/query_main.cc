@@ -1,7 +1,8 @@
 // Copyright 2012 Matt Tierney. All Rights Reserved.
 // BSD-Style License.
 
-#include <assert.h>
+#include <algorithm>
+#include <cassert>
 #include <fstream>
 #include <iostream>
 #include <iterator>
@@ -29,7 +30,7 @@ int main(int argc, char** argv) {
   assert(status.ok());
 
   std::map<std::string, int> counter;
-  
+
   for (int i = 0; i < inputs.size(); i++) {
     int highest_id = LevelDBKeys::LatestKeyId(inputs[i], db);
     for (int key_id = 0; key_id < highest_id; key_id++) {
@@ -38,7 +39,7 @@ int main(int argc, char** argv) {
       std::string value;
       leveldb::Status status = db->Get(leveldb::ReadOptions(), key, &value);
       assert(status.ok());
-      
+
       if (!ContainsKey(counter, value)) {
         counter[value] = 0;
       }
@@ -47,7 +48,7 @@ int main(int argc, char** argv) {
   }
   std::map<std::string, int>::iterator iter = std::max_element(counter.begin(), counter.end());
   std::cout << iter->first << std::endl;
-  
+
   delete db;
   return 0;
 }

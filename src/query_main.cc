@@ -18,7 +18,6 @@
 
 int main(int argc, char** argv) {
   // Read in the test values.
-
   std::ifstream fin("test.in");
   std::vector<std::string> inputs((std::istream_iterator<std::string>(fin)),
                                   std::istream_iterator<std::string>());

@@ -47,7 +47,8 @@ int main(int argc, char** argv) {
       counter[value]++;
     }
   }
-  std::map<std::string, int>::iterator iter = std::max_element(counter.begin(), counter.end());
+  std::map<std::string, int>::iterator iter = std::max_element(counter.begin(),
+                                                               counter.end());
   std::cout << iter->first << std::endl;
 
   delete db;

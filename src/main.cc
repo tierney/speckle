@@ -1,5 +1,6 @@
-// Copyright 2012 Matt Tierney. All Rights Reserved.
-// BSD-Style License.
+// Copyright (c) 2012 Matt Tierney. All Rights Reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
 
 #include <assert.h>
 #include <fstream>
